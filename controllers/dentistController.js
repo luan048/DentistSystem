@@ -1,14 +1,14 @@
-export class AuthUserController {
+export class AuthDentist {
     constructor(service) {
         this.service = service
     }
 
     register(req) {
-        const {firstName, email, password} = req.body
+        const {nome, cro, password} = req.body
 
         try {
-            const user = this.service.register(firstName, email, password)
-            return {code: 201, body: user}
+            const dentist = this.service.register(nome, cro, password)
+            return {code: 201, body: dentist}
         }
 
         catch(error) {
@@ -17,10 +17,10 @@ export class AuthUserController {
     }
 
     login(req) {
-        const {email, password} = req.body
-
+        const {cro, password} = req.body
+        
         try {
-            const body = this.service.login(email, password)
+            const body = this.service.login(cro, password)
             return {code: 200, body}
         }
 
