@@ -21,15 +21,10 @@ export class AuthService {
         return newUser
     }
 
-    login(email, password) {
-        const user = this.repository.findByEmail(email)
-
-        // Middleware
-        const isSamePassword = bcrypt.compareSync(password, user.password)
-
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET, { expiresIn: "1d" })
-        user.password = undefined
-        return { token, user }
+    login(req, res) {
+        const token = jwt.sign({ id: req.user.id, email: req.user.email }, process.env.SECRET, { expiresIn: "1d" })
+        req.user.password = undefined
+        return { token, user:  req.user }
     }
 
     verifyToken(token) {
