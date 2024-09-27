@@ -21,12 +21,9 @@ export class DentistService {
         return newDentist
     }
 
-    login(cro, password) {
-        const dentist = this.repository.findByCRO(cro)
-
-        const token = jwt.sign({id: dentist.id, cro: dentist.cro}, process.env.SECRET, {expiresIn: "1d"})
-        dentist.password = undefined
-        return {token, dentist}
+    login(req, res) {
+        const token = jwt.sign({id: req.dentist.id, cro: req.dentist.cro}, process.env.SECRET, {expiresIn: "1d"})
+        return {token, user: req.user}
     }
 
     verify(token) {
