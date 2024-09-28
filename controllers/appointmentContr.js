@@ -1,5 +1,5 @@
 export function AppointmentController(service) {
-    function index() {
+    function index(req) {
         const appointments = service.findAllAppointments()
         return {code: 200, body: {appointments}}
     }
