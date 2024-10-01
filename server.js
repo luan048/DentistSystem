@@ -1,8 +1,8 @@
 import express from "express";
 
-import {routerAppointment} from './routes/routesAppointment'
-import {routerAuth} from './routes/routesAuth'
-import {routerDentist} from './routes/routesDentist'
+import {routerAppointment} from './routes/routesAppointment.js'
+import {routerAuth} from './routes/routesAuth.js'
+import {routerDentist} from './routes/routesDentist.js'
 
 const server = express()
 const port = 8001

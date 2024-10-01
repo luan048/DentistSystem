@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { Dentist } from '../models/dentistModel'
+import { Dentist } from '../models/dentistModel.js'
 import jwt from 'jsonwebtoken'
 
 import dotenv from 'dotenv'

@@ -1,4 +1,4 @@
-import {Appointment} from '../models/appointmentModel'
+import {Appointment} from '../models/appointmentModel.js'
 
 export class AppointmentService {
     constructor(repository) {

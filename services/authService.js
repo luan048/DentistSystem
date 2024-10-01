@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { User } from '../models/authModel'
+import { User } from '../models/authModel.js'
 import jwt from 'jsonwebtoken'
 
 import dotenv from 'dotenv'
