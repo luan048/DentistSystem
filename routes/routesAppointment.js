@@ -18,7 +18,7 @@ routerAppointment.get('/home', (req, res) => {
 })
 
 routerAppointment.get('/appoint/list', AuthRole, (req, res) => {
-    const {code, body} = appointController.index(req)
+    const {code, body} = appointController.index(req) // Como parametro no controller já está o req.body
     res.code(code).json(body)
 })
 
