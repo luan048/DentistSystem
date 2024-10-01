@@ -13,6 +13,5 @@ server.use(routerAuth)
 server.use(routerDentist)
 
 server.listen(port, () => {
-    tryToConnect()
     console.log(`Running in port: ${port}`)
 })

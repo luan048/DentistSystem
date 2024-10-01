@@ -1,5 +1,3 @@
-import { status } from "express/lib/response"
-
 export class AuthUserController {
     constructor(service) {
         this.service = service
