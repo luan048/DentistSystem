@@ -15,12 +15,12 @@ const authController = new AuthUserController(authService)
 
 routerAuth.post('api/authRegister', userValidation.registerValidation, (req, res) => {
     const {code, body} = authController.register(req) // Como parametro no controler já está o req.body
-    res.code(code).json(body)
+    res.status(code).json(body)
 })
 
 routerAuth.post('api/authLogin', userValidation.loginValidation, (req, res) => {
     const {code, body} = authController.login(req)
-    res.code(code).json(body)
+    res.status(code).json(body)
 })
 
 export {routerAuth}

@@ -1,7 +1,7 @@
 export function AppointmentController(service) {
     function index(req) {
         const appointments = service.findAllAppointments()
-        return {code: 200, body: {appointments}}
+        return {status: 200, body: {appointments}}
     }
 
     function save(req) {
@@ -9,7 +9,7 @@ export function AppointmentController(service) {
         const user = req.user
 
         const appointments = service.createAppointment({user, roomId, firstName, dateOfAppointment})
-        return {code: 201, body: {message: 'Appointment created sucessfully', appointments}}
+        return {status: 201, body: {message: 'Appointment created sucessfully', appointments}}
     }
 
     return {index, save}

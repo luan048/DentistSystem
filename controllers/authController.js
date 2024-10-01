@@ -1,3 +1,5 @@
+import { status } from "express/lib/response"
+
 export class AuthUserController {
     constructor(service) {
         this.service = service
@@ -8,11 +10,11 @@ export class AuthUserController {
 
         try {
             const user = this.service.register(firstName, email, password)
-            return {code: 201, body: user}
+            return {status: 201, body: user}
         }
 
         catch(error) {
-            return {code: 400, body: {message: error.message}}
+            return {status: 400, body: {message: error.message}}
         }
     }
 
@@ -21,11 +23,11 @@ export class AuthUserController {
 
         try {
             const body = this.service.login(email, password)
-            return {code: 200, body}
+            return {status: 200, body}
         }
 
         catch(error) {
-            return {code: 400, body: {message: error.message}}
+            return {status: 400, body: {message: error.message}}
         }
     }
 }

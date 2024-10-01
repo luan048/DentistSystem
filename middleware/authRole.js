@@ -7,10 +7,10 @@ const userService = new AuthService(userRepository)
 export const AuthRole = {
     preHandler: (req, reply, done) => {
         const token = req.headers.authorization?.replace(/^Bearer /, "")
-        if(!token) reply.code(401).json({message: "Unauthorized: token missing"})
+        if(!token) reply.status(401).json({message: "Unauthorized: token missing"})
 
         const user = userService.verifyToken(token)
-        if(!user) reply.code(404).json({message: "Unauthorized invalid token"})
+        if(!user) reply.status(404).json({message: "Unauthorized invalid token"})
 
         req.user = user
         done()

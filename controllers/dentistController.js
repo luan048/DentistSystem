@@ -1,3 +1,5 @@
+import { status } from "express/lib/response"
+
 export class AuthDentist {
     constructor(service) {
         this.service = service
@@ -8,11 +10,11 @@ export class AuthDentist {
 
         try {
             const dentist = this.service.register(nome, cro, password)
-            return {code: 201, body: dentist}
+            return {status: 201, body: dentist}
         }
 
         catch(error) {
-            return {code: 400, body: {message: error.message}}
+            return {status: 400, body: {message: error.message}}
         }
     }
 
@@ -21,11 +23,11 @@ export class AuthDentist {
         
         try {
             const body = this.service.login(cro, password)
-            return {code: 200, body}
+            return {status: 200, body}
         }
 
         catch(error) {
-            return {code: 400, body: {message: error.message}}
+            return {status: 400, body: {message: error.message}}
         }
     }
 }

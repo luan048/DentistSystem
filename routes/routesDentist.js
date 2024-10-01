@@ -15,12 +15,12 @@ const dentistController = new AuthDentist(dentistService)
 
 routerDentist.post('api/dentistRegister', dentistValidation.registerValidation, (req, res) => {
     const {code, body} = dentistController.register(req) // Como parametro, no controller já está o req.body
-    res.code(code).json(body)
+    res.status(code).json(body)
 })
 
 routerDentist.post('api/dentistLogin', dentistValidation.loginValidation, (req, res) => {
     const {code, body} = dentistController.login(req)
-    res.code(code).json(body)
+    res.status(code).json(body)
 })
 
 export {routerDentist}

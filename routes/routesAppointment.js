@@ -19,12 +19,12 @@ routerAppointment.get('/home', (req, res) => {
 
 routerAppointment.get('/appoint/list', AuthRole, (req, res) => {
     const {code, body} = appointController.index(req) // Como parametro no controller já está o req.body
-    res.code(code).json(body)
+    res.status(code).json(body)
 })
 
 routerAppointment.post('/appoint/create', AuthRole, (req, res) => {
     const {code, body} = appointController.save(req)
-    res.code(code).json(body)
+    res.status(code).json(body)
 })
 
 export { routerAppointment }
