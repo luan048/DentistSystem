@@ -23,4 +23,4 @@ routerDentist.post('api/dentistLogin', dentistValidation.loginValidation, (req, 
     res.code(code).json(body)
 })
 
-export default routerDentist
+export {routerDentist}

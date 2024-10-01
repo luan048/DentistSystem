@@ -23,4 +23,4 @@ routerAuth.post('api/authLogin', userValidation.loginValidation, (req, res) => {
     res.code(code).json(body)
 })
 
-export default routerAuth
+export {routerAuth}

@@ -27,4 +27,4 @@ routerAppointment.post('/appoint/create', AuthRole, (req, res) => {
     res.code(code).json(body)
 })
 
-export default routerAppointment
+export { routerAppointment }
