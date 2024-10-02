@@ -10,21 +10,27 @@ export class AuthService {
         this.repository = repository
     }
 
-    register(name, email, password) {
+    register(firstName, email, password) {
         const userExists = this.repository.findByEmail(email)
         if (userExists) throw new Error("This email was already user another user")
 
-        const newUser = new User({ name, email, password })
+        const newUser = new User({ firstName, email, password })
         newUser.password = bcrypt.hashSync(newUser.password, 10)
 
         this.repository.save(newUser)
         return newUser
     }
 
-    login(req, res) {
-        const token = jwt.sign({ id: req.user.id, email: req.user.email }, process.env.SECRET, { expiresIn: "1d" })
-        req.user.password = undefined
-        return { token, user:  req.user }
+    login(email, password) {
+        const user = this.repository.findByEmail(email)
+    
+        if(!user) throw new Error("User not found")
+    
+        const isSamePassword = bcrypt.compareSync(password, user.password)
+        if(!isSamePassword) throw new Error("Wrong password!")
+    
+        const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET, { expiresIn: "1d" })
+        return { token, user: { ...user, password: undefined } }
     }
 
     verifyToken(token) {
