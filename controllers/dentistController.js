@@ -3,12 +3,12 @@ export class AuthDentist {
         this.service = service
     }
 
-    register(req) {
+    register(req, res) {
         const {nome, cro, password} = req.body
 
         try {
             const dentist = this.service.register(nome, cro, password)
-            return {status: 201, body: dentist}
+            return {status: 200, body: dentist}
         }
 
         catch(error) {
@@ -16,7 +16,7 @@ export class AuthDentist {
         }
     }
 
-    login(req) {
+    login(req, res) {
         const {cro, password} = req.body
         
         try {

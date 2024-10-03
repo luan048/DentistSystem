@@ -21,9 +21,16 @@ export class DentistService {
         return newDentist
     }
 
-    login(req, res) {
-        const token = jwt.sign({id: req.dentist.id, cro: req.dentist.cro}, process.env.SECRET, {expiresIn: "1d"})
-        return {token, user: req.user}
+    login(cro, password) {
+        const dentist = this.repository.findByCRO(cro)
+
+        if(!dentist) throw new Error("Dentist not found")
+
+        const isSamePassword = bcrypt.compareSync(password, dentist.password)
+        if(!isSamePassword) throw new Error("Wrong password!")
+
+        const token = jwt.sign({ id: dentist.id, cro: dentist.cro }, process.env.SECRET, {expiresIn: "1d"})
+        return {token, dentist: {...dentist, password: undefined}}
     }
 
     verify(token) {

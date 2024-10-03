@@ -1,6 +1,3 @@
-import bcrypt from 'bcrypt'
-import { Dentist } from "../models/dentistModel.js";
-
 export class DentistValidation {
 
     async registerValidation(req, res, next) {
@@ -22,15 +19,19 @@ export class DentistValidation {
     }
 
     async loginValidation(req, res, next) {
-        const {cro, password} = req.body
-        const dentist = await Dentist.findOne({where: {cro} })
+        const {cro, password} = req.body || {}
+        const fields = ["cro", "password"]
+        const errors = []
 
-        if(!dentist) return res.status(404).json({message: 'Dentist not found'})
+        for(const field of fields) {
+            if(!req.body[field]) {
+                errors.push(`The ${field} is null`)
+            }
+        }
 
-        const isSamePassword = bcrypt.compareSync(password, dentist.password)
-        if (!isSamePassword) return res.status(401).json({message: 'Invalid Password'})
-
-        req.dentist = dentist
+        if(errors.length) {
+            return res.status(404).json({message: errors})
+        }
 
         next()
     }
