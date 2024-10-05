@@ -1,25 +1,27 @@
-import {Appointment} from '../models/appointmentModel.js'
+import { AppointmentRepository } from "../database/appointment_Rep.js";
 
 export class AppointmentService {
+    
     constructor(repository) {
         this.repository = repository
     }
 
-    findAllAppointents() {
+    findAllAppointments() {
         return this.repository.findAll()
     }
 
     createAppointment({user, roomId, firstName, dateOfAppointment}) {
-        const newAppointment = new Appointment({user, roomId, firstName, dateOfAppointment})
+        const newAppointment = new AppointmentRepository({user, roomId, firstName, dateOfAppointment})
 
         const overlappingAppointment = this.repository.findAll().find((appointment) => {
             return (
-                appointment.roomId === newAppointment.roomId && appointment.firstName < newAppointment.firstName && appointment.dateOfAppointment > newAppointment.dateOfAppointment
+                appointment.roomId === newAppointment.roomId &&
+                appointment.dateOfAppointment === newAppointment.dateOfAppointment
             )
         })
 
         if(overlappingAppointment) {
-            throw new Error("An appointment is already scheduled")
+            throw new Error ("The room is already booked for the selected dates.")
         }
 
         this.repository.create(newAppointment)

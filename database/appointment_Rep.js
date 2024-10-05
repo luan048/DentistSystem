@@ -1,4 +1,4 @@
-export class AppointmentRep {
+export class AppointmentRepository {
     constructor() {
         this.appointments = []
     }
@@ -8,6 +8,6 @@ export class AppointmentRep {
     }
 
     create(appointment) {
-        this.appointments.push(appointment)
+        appointments.push(appointment)
     }
 }

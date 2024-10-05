@@ -7,24 +7,6 @@ import {AppointmentController} from '../controllers/appointmentContr.js'
 import {AuthRole} from '../middleware/authRole.js'
 
 const routerAppointment = Router()
-
-
-const appointRepository = new AppointmentRep()
-const appointService = new AppointmentService(appointRepository)
-const appointController = new AppointmentController(appointService)
-
-routerAppointment.get('/home', (req, res) => {
-    res.json({message: "Welcome to the Home Page"})
-})
-
-routerAppointment.get('/appoint/list', AuthRole, (req, res) => {
-    const {code, body} = appointController.index(req) // Como parametro no controller já está o req.body
-    res.status(code).json(body)
-})
-
-routerAppointment.post('/appoint/create', AuthRole, (req, res) => {
-    const {code, body} = appointController.save(req)
-    res.status(code).json(body)
-})
+// Restruturação
 
 export { routerAppointment }
