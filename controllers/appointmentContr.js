@@ -17,7 +17,6 @@ export class AppointmentController{
         }
 
         const appointment = this.service.createAppointment({user, roomId, firstName, dateOfAppointment})
-
         return {status: 201, body : {message: 'Appointment created sucessfully', appointment}}
     }
 }

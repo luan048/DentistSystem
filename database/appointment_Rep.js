@@ -8,6 +8,6 @@ export class AppointmentRepository {
     }
 
     create(appointment) {
-        appointments.push(appointment)
+        this.appointments.push(appointment)
     }
 }

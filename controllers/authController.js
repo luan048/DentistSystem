@@ -4,10 +4,10 @@ export class AuthUserController {
     }
 
     register(req, res) {
-        const { firstName, email, password } = req.body
+        const { name, email, password } = req.body
 
         try {
-            const user = this.service.register(firstName, email, password)
+            const user = this.service.register(name, email, password)
             return { status: 201, body: user }
         }
 

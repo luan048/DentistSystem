@@ -4,7 +4,7 @@ import {AppointmentRepository} from '../database/appointment_Rep.js'
 import {AppointmentService} from '../services/appointmentService.js'
 import {AppointmentController} from '../controllers/appointmentContr.js'
 
-import { AuthRole } from '../middleware/authRole.js'
+import {AuthRole} from '../middleware/authRole.js'
 
 const routerAppointment = Router()
 
@@ -16,12 +16,12 @@ routerAppointment.get('/home', (req, res) => {
     res.json({message: "Welcome to Home Page"})
 })
 
-routerAppointment.get('/api/listAppointment', AuthRole, (req, res) => {
+routerAppointment.get('/api/listAppointment', AuthRole.preHandler, (req, res) => {
     const {status, body} = appointmentController.index(req)
     res.status(status).json(body)
 })
 
-routerAppointment.post('/api/createAppointment', AuthRole, (req, res) => {
+routerAppointment.post('/api/createAppointment', AuthRole.preHandler, (req, res) => {
     const {status, body} = appointmentController.save(req)
     res.status(status).json(body)
 })

@@ -1,8 +1,8 @@
 export class AuthValidation {
 
     async registerValidation(req, res, next) {
-        const { firstName, email, password } = req.body || {}
-        const fields = ["firstName", "email", "password"]
+        const { name, email, password } = req.body || {}
+        const fields = ["name", "email", "password"]
         const errors = []
 
         for (const field of fields) {
