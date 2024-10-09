@@ -5,6 +5,7 @@ import {AppointmentService} from '../services/appointmentService.js'
 import {AppointmentController} from '../controllers/appointmentContr.js'
 
 import {AuthRole} from '../middleware/authRole.js'
+import {DentistRole} from '../middleware/authRole.js'
 
 const routerAppointment = Router()
 
@@ -16,7 +17,8 @@ routerAppointment.get('/home', (req, res) => {
     res.json({message: "Welcome to Home Page"})
 })
 
-routerAppointment.get('/api/listAppointment', AuthRole.preHandler, (req, res) => {
+// Essa função GET só está disponivel para dentistas cadastrados
+routerAppointment.get('/api/listAppointment', DentistRole.preHandler, (req, res) => {
     const {status, body} = appointmentController.index(req)
     res.status(status).json(body)
 })
